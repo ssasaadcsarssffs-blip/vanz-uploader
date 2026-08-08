@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanz Uploader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="background-grid"></div>
+
+    <nav class="top-nav">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <span>Vanz Uploader</span>
+        </div>
+        <i class="fa-solid fa-bars menu-icon" id="menuToggle"></i>
+    </nav>
+
+    <div class="side-menu-overlay" id="menuOverlay"></div>
+    <aside class="side-menu" id="sideMenu">
+        <div class="side-menu-header">
+            <h3>Navigasi</h3>
+            <i class="fa-solid fa-xmark close-icon" id="menuClose"></i>
+        </div>
+        <ul class="nav-links">
+            <li>
+                <a id="navUploader" class="active-link">
+                    <i class="fa-solid fa-arrow-up-from-bracket"></i> Unggah File
+                </a>
+            </li>
+            <li>
+                <a id="navApi">
+                    <i class="fa-solid fa-book"></i> Api Uploader
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+
+        <section id="pageUploader" class="page-section active">
+            <div class="upload-badge">
+                <span style="color: var(--primary-color);">●</span> vanz uploader
+            </div>
+
+            <header class="uploader-header">
+                <h1>Vanz Uploader</h1>
+                <p>Upload files, get instant direct links. Encrypted storage, fast delivery.</p>
+            </header>
+
+            <div class="file-uploader-section">
+                <div class="upload-box" id="dropZone">
+                    <div class="upload-icon-circle">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
+                    <h3>Drop file here</h3>
+                    <p>or click to browse · max 1 GB</p>
+                </div>
+
+                <button type="button" class="btn-choose" id="browseBtn">Choose file</button>
+                <input type="file" id="fileInput" hidden>
+
+                <div class="file-list" id="fileList"></div>
+
+                <button type="button" class="btn-upload" id="uploadBtn" disabled>
+                    <i class="fa-solid fa-paper-plane"></i> Unggah Sekarang
+                </button>
+
+                <div class="result-card" id="resultCard">
+                    <span>File Berhasil Diunggah:</span>
+                    <input type="text" class="result-url-input" id="resultUrlInput" readonly>
+                    <button type="button" class="btn-choose" id="copyResultBtn">Salin Direct Link</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="pageApi" class="page-section">
+            <div class="api-header-section">
+                <h1>Example Code</h1>
+                <p>Hubungkan Bot WhatsApp mu dengan praktis dan cepat untuk mengupload media tanpa membuka website!!</p>
+            </div>
+
+            <div class="code-card">
+                <div class="code-card-header">
+                    <div class="mac-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <button class="btn-copy" onclick="copyText('POST -> https://cdn.vanzz.my.id/api/upload', this)">
+                        <i class="fa-regular fa-copy"></i> Salin
+                    </button>
+                </div>
+                <div class="code-card-body">
+                    <div class="post-box">
+                        <span class="post-tag">POST</span>
+                        <span style="color: var(--text-muted);">→</span>
+                        <span class="post-url">https://cdn.vanzz.my.id/api/upload</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="api-header-section">
+                <h1 style="font-size: 1.4rem;">Integrasi Bot WhatsApp</h1>
+                <p>Example Code</p>
+            </div>
+
+            <div class="code-card">
+                <div class="code-card-header">
+                    <div class="mac-dots">
+                        <span class="dot dot-red"></span>
+                        <span class="dot dot-yellow"></span>
+                        <span class="dot dot-green"></span>
+                    </div>
+                    <span class="code-card-title">upload.js</span>
+                    <button class="btn-copy" id="copyCodeBtn">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="code-card-body">
+                    <pre><code class="language-javascript" id="jsCodeBlock">import axios from 'axios'
+import FormData from 'form-data'
+import fs from 'fs'
+
+async function uploadToCDN(filePath) {
+  const form = new FormData()
+  form.append('file', fs.createReadStream(filePath))
+
+  const res = await axios.post(
+    'https://cdn.vanzz.my.id/api/upload',
+    form,
+    { headers: form.getHeaders() }
+  )
+
+  return res.data.url
+}
+
+uploadToCDN('/path/to/your/file.jpg')</code></pre>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="script/script.js"></script>
+</body>
+</html>
